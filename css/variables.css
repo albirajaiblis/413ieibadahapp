@@ -1,0 +1,161 @@
+/* Prayer App - Design Tokens & Variables */
+:root {
+  /* Default Color Palette - Emerald Green, Navy, White, Gold */
+  --primary-emerald: #059669;
+  --primary-emerald-dark: #047857;
+  --primary-emerald-light: #10B981;
+  --primary-emerald-bg: #ECFDF5;
+  --primary-emerald-glow: rgba(5, 150, 105, 0.25);
+
+  --accent-gold: #F59E0B;
+  --accent-gold-dark: #D97706;
+  --accent-gold-light: #FCD34D;
+  --accent-gold-bg: #FFFBEB;
+  --accent-gold-glow: rgba(245, 158, 11, 0.25);
+
+  --navy-deep: #0F172A;
+  --navy-surface: #1E293B;
+  --navy-muted: #334155;
+  --navy-border: #475569;
+
+  --bg-app: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --text-subtle: #94A3B8;
+  --text-inverse: #FFFFFF;
+
+  --border-light: #E2E8F0;
+  --border-gold: rgba(245, 158, 11, 0.3);
+
+  --hero-grad-start: #047857;
+  --hero-grad-mid: #065F46;
+  --hero-grad-end: #0F172A;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px -5px rgba(5, 150, 105, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-gold: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
+
+  /* Border Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Layout */
+  --max-width: 480px;
+  --bottom-nav-height: 68px;
+}
+
+/* Base Dark Mode Tokens */
+[data-theme="dark"] {
+  --bg-app: #0B132B;
+  --bg-surface: #1E293B;
+  --bg-card: #151E33;
+  --bg-glass: rgba(30, 41, 59, 0.85);
+
+  --primary-emerald-bg: rgba(5, 150, 105, 0.15);
+  --accent-gold-bg: rgba(245, 158, 11, 0.15);
+
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --text-subtle: #64748B;
+
+  --border-light: #334155;
+  --border-gold: rgba(245, 158, 11, 0.4);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* ================= THEME PRESETS ================= */
+
+/* 1. Emerald Zamrud (Default) */
+[data-theme-preset="emerald"] {
+  --primary-emerald: #059669;
+  --primary-emerald-dark: #047857;
+  --primary-emerald-light: #10B981;
+  --primary-emerald-glow: rgba(5, 150, 105, 0.25);
+  --hero-grad-start: #047857;
+  --hero-grad-mid: #065F46;
+  --hero-grad-end: #0F172A;
+}
+
+/* 2. Royal Sapphire (Midnight Blue) */
+[data-theme-preset="sapphire"] {
+  --primary-emerald: #2563EB;
+  --primary-emerald-dark: #1D4ED8;
+  --primary-emerald-light: #60A5FA;
+  --primary-emerald-bg: rgba(37, 99, 235, 0.12);
+  --primary-emerald-glow: rgba(37, 99, 235, 0.28);
+  --hero-grad-start: #1E40AF;
+  --hero-grad-mid: #1E3A8A;
+  --hero-grad-end: #090D16;
+}
+[data-theme-preset="sapphire"][data-theme="dark"] {
+  --bg-app: #080C17;
+  --bg-card: #111827;
+  --bg-surface: #1F2937;
+}
+
+/* 3. Midnight Gold (Luxury Obsidian & Gold) */
+[data-theme-preset="gold"] {
+  --primary-emerald: #D97706;
+  --primary-emerald-dark: #B45309;
+  --primary-emerald-light: #F59E0B;
+  --primary-emerald-bg: rgba(245, 158, 11, 0.12);
+  --primary-emerald-glow: rgba(245, 158, 11, 0.3);
+  --hero-grad-start: #B45309;
+  --hero-grad-mid: #78350F;
+  --hero-grad-end: #0A0A0C;
+}
+[data-theme-preset="gold"][data-theme="dark"] {
+  --bg-app: #0A0A0C;
+  --bg-card: #141418;
+  --bg-surface: #1F1F24;
+}
+
+/* 4. Desert Sunset (Coral Terracotta) */
+[data-theme-preset="sunset"] {
+  --primary-emerald: #E11D48;
+  --primary-emerald-dark: #BE123C;
+  --primary-emerald-light: #FB7185;
+  --primary-emerald-bg: rgba(225, 29, 72, 0.12);
+  --primary-emerald-glow: rgba(225, 29, 72, 0.25);
+  --hero-grad-start: #BE123C;
+  --hero-grad-mid: #9F1239;
+  --hero-grad-end: #1C1917;
+}
+[data-theme-preset="sunset"][data-theme="dark"] {
+  --bg-app: #120E10;
+  --bg-card: #1E1719;
+  --bg-surface: #291F23;
+}
+
+/* 5. Sage Harmony (Earthy Natural Green) */
+[data-theme-preset="sage"] {
+  --primary-emerald: #15803D;
+  --primary-emerald-dark: #166534;
+  --primary-emerald-light: #4ADE80;
+  --primary-emerald-bg: rgba(21, 128, 61, 0.12);
+  --primary-emerald-glow: rgba(21, 128, 61, 0.25);
+  --hero-grad-start: #166534;
+  --hero-grad-mid: #14532D;
+  --hero-grad-end: #18181B;
+}
+[data-theme-preset="sage"][data-theme="dark"] {
+  --bg-app: #0F1410;
+  --bg-card: #18221A;
+  --bg-surface: #223024;
+}
