@@ -920,3 +920,83 @@
 .switch-input:checked + .switch-slider::before {
   transform: translateX(20px);
 }
+
+/* Islamic Quiz & Game Component Styles */
+.btn-mode {
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-mode:hover, .btn-mode.active {
+  background: var(--primary-emerald);
+  color: #FFFFFF;
+  border-color: var(--primary-emerald);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+}
+
+.quiz-option-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+  border-color: var(--primary-emerald);
+  background: rgba(5, 150, 105, 0.05);
+}
+
+.quiz-option-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary-emerald);
+  flex-shrink: 0;
+}
+
+.quiz-option-btn.correct {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: #10B981 !important;
+  color: #10B981 !important;
+}
+
+.quiz-option-btn.correct .quiz-option-num {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #10B981;
+}
+
+.quiz-option-btn.wrong {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: #EF4444 !important;
+  color: #EF4444 !important;
+}
+
+.quiz-option-btn.wrong .quiz-option-num {
+  background: #EF4444;
+  color: #FFFFFF;
+  border-color: #EF4444;
+}
+

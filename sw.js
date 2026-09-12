@@ -1,4 +1,4 @@
-const CACHE_NAME = 'prayer-app-v3';
+const CACHE_NAME = 'prayer-app-v4';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -9,6 +9,9 @@ const ASSETS_TO_CACHE = [
   './css/components.css',
   './js/app.js',
   './js/store.js',
+  './js/geoEngine.js',
+  './js/quizData.js',
+  './js/quizEngine.js',
   './js/prayerEngine.js',
   './js/cityData.js',
   './js/tasbihEngine.js',
@@ -19,6 +22,7 @@ const ASSETS_TO_CACHE = [
   './js/views/homeView.js',
   './js/views/prayerView.js',
   './js/views/worshipView.js',
+  './js/views/quizView.js',
   './js/views/progressView.js',
   './js/views/settingsView.js',
   './assets/icons/favicon.svg',

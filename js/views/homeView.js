@@ -2,6 +2,8 @@
 import { getCityById } from '../cityData.js';
 import { calculatePrayerTimes, getNextPrayerInfo, getHijriDateString } from '../prayerEngine.js';
 import { Store, getTodayKey } from '../store.js';
+import { updateStoreWithGPSLocation } from '../geoEngine.js';
+import { showToast } from '../app.js';
 
 let countdownTimerInterval = null;
 
@@ -32,9 +34,9 @@ export function renderHomeView(container, navigateTo) {
     <!-- Hero Next Prayer Countdown Card -->
     <div class="hero-card">
       <div class="hero-top-info">
-        <div class="hero-location-pill">
+        <div class="hero-location-pill" id="home-gps-refresh-btn" title="Klik untuk Deteksi GPS Otomatis" style="cursor: pointer;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>${settings.customLat ? 'GPS Kustom' : city.name}</span>
+          <span id="home-location-text">${settings.customLat ? (settings.locationName || `GPS: ${lat.toFixed(2)}°, ${lng.toFixed(2)}°`) : city.name} 🎯</span>
         </div>
         <div class="hero-date-text">
           <div>${gregorianDateStr}</div>
@@ -155,6 +157,23 @@ export function renderHomeView(container, navigateTo) {
     const circumference = 2 * Math.PI * 40; // ~251.2
     const offset = circumference - (progressPercent / 100) * circumference;
     ringFill.style.strokeDashoffset = offset;
+  }
+
+  // GPS Quick Refresh Click Handler
+  const gpsPill = container.querySelector('#home-gps-refresh-btn');
+  const locText = container.querySelector('#home-location-text');
+  if (gpsPill) {
+    gpsPill.addEventListener('click', async () => {
+      if (locText) locText.textContent = 'Mendeteksi... ⏳';
+      try {
+        const loc = await updateStoreWithGPSLocation();
+        showToast(`📍 Lokasi GPS Diperbarui: ${loc.lat}, ${loc.lng}`);
+        renderHomeView(container, navigateTo);
+      } catch (err) {
+        alert(err.message || 'Gagal mengambil lokasi GPS.');
+        renderHomeView(container, navigateTo);
+      }
+    });
   }
 
   // Start live ticking countdown timer

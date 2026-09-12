@@ -1,6 +1,8 @@
 /* Settings View Module with Cool Theme Preset Selector */
 import { CITIES_DATABASE } from '../cityData.js';
 import { Store } from '../store.js';
+import { updateStoreWithGPSLocation } from '../geoEngine.js';
+import { showToast } from '../app.js';
 
 export function renderSettingsView(container, onSettingsChange) {
   const settings = Store.getSettings();
@@ -36,6 +38,11 @@ export function renderSettingsView(container, onSettingsChange) {
     <!-- LOCATION SETTINGS CARD -->
     <div class="card">
       <div class="section-title" style="margin-bottom: 14px;">Lokasi & Koordinat</div>
+
+      <button class="btn-primary" id="auto-gps-btn" style="width: 100%; margin-bottom: 14px; justify-content: center; font-weight: 700; gap: 8px;">
+        <span>📍</span>
+        <span id="gps-btn-text">Deteksi Lokasi GPS Otomatis</span>
+      </button>
 
       <div class="form-group">
         <label class="form-label">Pilih Kota / Kabupaten</label>
@@ -148,9 +155,38 @@ export function renderSettingsView(container, onSettingsChange) {
   });
 
   // Attach Event Handlers
+  const gpsBtn = container.querySelector('#auto-gps-btn');
+  const gpsBtnText = container.querySelector('#gps-btn-text');
   const citySelect = container.querySelector('#setting-city-select');
   const latInput = container.querySelector('#setting-lat-input');
   const lngInput = container.querySelector('#setting-lng-input');
+
+  if (gpsBtn) {
+    gpsBtn.addEventListener('click', async () => {
+      gpsBtn.disabled = true;
+      gpsBtnText.textContent = 'Mendeteksi Lokasi GPS...';
+      try {
+        const loc = await updateStoreWithGPSLocation();
+        latInput.value = loc.lat;
+        lngInput.value = loc.lng;
+        if (loc.nearestCity) {
+          citySelect.value = loc.nearestCity.id;
+        }
+        showToast(`📍 Lokasi GPS Dideteksi: ${loc.lat}, ${loc.lng}`);
+        gpsBtnText.textContent = '📍 Lokasi Berhasil Dideteksi!';
+        setTimeout(() => {
+          gpsBtn.disabled = false;
+          gpsBtnText.textContent = 'Deteksi Lokasi GPS Otomatis';
+        }, 2000);
+        if (onSettingsChange) onSettingsChange();
+      } catch (err) {
+        alert(err.message || 'Gagal mengambil koordinat GPS.');
+        gpsBtn.disabled = false;
+        gpsBtnText.textContent = 'Deteksi Lokasi GPS Otomatis';
+      }
+    });
+  }
+
   const methodSelect = container.querySelector('#setting-method-select');
   const themeSwitch = container.querySelector('#setting-theme-switch');
   const audioSwitch = container.querySelector('#setting-audio-switch');

@@ -7,13 +7,36 @@ import { toggleRadio, setRadioVolume, getCurrentRadioState, subscribeRadioEvents
 
 let radioUnsubscribe = null;
 
-export function renderWorshipView(container) {
+export function renderWorshipView(container, navigateTo) {
   const todayKey = getTodayKey();
   const dailyLog = Store.getDailyLog(todayKey);
   const tasbihState = Store.getTasbihState();
   const radioState = getCurrentRadioState();
 
   container.innerHTML = `
+    <!-- GAME KUIS ISLAMI BANNER CARD -->
+    <div class="card" id="quiz-banner-card" style="
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(5, 150, 105, 0.15));
+      border: 1px solid var(--accent-gold-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      cursor: pointer;
+    ">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 2rem;">🎮</div>
+        <div>
+          <div style="font-weight: 800; font-size: 1rem; color: var(--accent-gold-light);">Game Kuis Islami</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted);">Tebak Ayat, Tebak Surah, & Sambung Ayat</div>
+        </div>
+      </div>
+      <button class="btn-primary" style="padding: 8px 14px; font-size: 0.82rem; font-weight: 700; white-space: nowrap;">
+        Mainkan ➔
+      </button>
+    </div>
+
     <!-- RADIO SUNNAH STREAMING WIDGET -->
     <div class="radio-card">
       <div class="radio-top-header">
@@ -161,6 +184,14 @@ export function renderWorshipView(container) {
       </div>
     </div>
   `;
+
+  // QUIZ BANNER HANDLER
+  const quizBanner = container.querySelector('#quiz-banner-card');
+  if (quizBanner && navigateTo) {
+    quizBanner.addEventListener('click', () => {
+      navigateTo('quiz');
+    });
+  }
 
   // RADIO SUNNAH HANDLERS
   const radioPlayBtn = container.querySelector('#radio-play-btn');

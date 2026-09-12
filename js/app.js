@@ -5,6 +5,7 @@ import { renderPrayerView } from './views/prayerView.js';
 import { renderWorshipView } from './views/worshipView.js';
 import { renderProgressView } from './views/progressView.js';
 import { renderSettingsView } from './views/settingsView.js';
+import { renderQuizView } from './views/quizView.js';
 
 let currentTab = 'home';
 
@@ -69,7 +70,10 @@ function renderCurrentView() {
         renderPrayerView(container);
         break;
       case 'worship':
-        renderWorshipView(container);
+        renderWorshipView(container, (tab) => switchTab(tab));
+        break;
+      case 'quiz':
+        renderQuizView(container);
         break;
       case 'progress':
         renderProgressView(container);

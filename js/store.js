@@ -8,6 +8,8 @@ const DEFAULT_SETTINGS = {
   cityId: 'jakarta',
   customLat: null,
   customLng: null,
+  useGPS: false,
+  locationName: null,
   method: 'kemenag', // kemenag, mwl, isna, egypt
   adhanAudioEnabled: true,
   adhanSound: 'makkah',
